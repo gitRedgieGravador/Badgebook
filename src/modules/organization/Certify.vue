@@ -43,8 +43,10 @@
           <br>
           <b-label for="role">Pick Role</b-label>
           <b-card>
-            <b-form-select v-model="selectedRole" :options="options"></b-form-select>
-            <i><p class="text-center red"> {{ warning }}</p></i>
+            <b-form-select v-model="selectedRole" :options="options" @change="notnull"></b-form-select>
+            <i>
+              <p class="text-center red">{{ warning }}</p>
+            </i>
           </b-card>
           <br>
           <b-card v-if="userExit">
@@ -131,13 +133,18 @@ export default {
         });
         this.$bvModal.hide("addRecipient-modal");
         this.resetModal();
-      }else{
-        this.warning = "Please select a role"
+      } else {
+        this.warning = "Please select a role";
       }
     },
     handleCancel() {
       this.resetModal();
       this.$bvModal.hide("addRecipient-modal");
+    },
+    notnull() {
+      if (this.selectedRole !== "No role selected") {
+        this.warning = ""
+      }
     }
   }
 };

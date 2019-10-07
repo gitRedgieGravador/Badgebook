@@ -94,7 +94,7 @@ export default {
   methods: {
     updateProfile() {
       let uri_sendUpdated = `http://localhost:4000/user/regular/profile/update/`;
-      this.axios.post(uri_sendUpdated, this.newinfo).then(() => {
+      this.axios.post(uri_sendUpdated, this.newinfo).then( response => {
         this.newinfo = response.data;
       });
     }

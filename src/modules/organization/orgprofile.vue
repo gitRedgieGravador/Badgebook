@@ -5,20 +5,8 @@
         <img src="@/assets/pn.png"  id="profile">
       </b-card>
       <div class="card-header">
-        <h3> {{userinfo.orgname }}</h3>
+        <h3> {{orginfo.orgname }}</h3>
         <button v-on:click="InsideMethod" class="btn btn-primary btn-block">Update Profile</button>
-      </div>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Personal Imformation</h5>
-      <div class="card-text">
-        <p>Username: {{ userinfo.username }}</p>
-        <p>Age: {{userinfo.age}} years old</p>
-        <p>Gender: {{ userinfo.gender }}</p>
-        <p>Occupation: {{userinfo.occupation}}</p>
-        <p>Experience: {{ userinfo.years }} years of work experience</p>
-        <p>Address: {{userinfo.address}}</p>
-        <p>Email: {{ userinfo.email }}</p>
       </div>
     </div>
   </div>
@@ -34,16 +22,8 @@ export default {
     };
   },
   created() {
-    this.userinfo = {
-      orgname: "Passerelles numeriques",
-      username: "mrclay",
-      age: 22,
-      gender: "Male",
-      occupation: "Web developer",
-      years: 5,
-      address: "Talamban",
-      email: "redgie@gmail.com",
-      logo:"@/assets/pn.png"
+    this.orginfo = {
+      orgname: "Passerelles numeriques"
     };
 
     let uri_profile = `http://localhost:4000/user/regular/profile/`;
