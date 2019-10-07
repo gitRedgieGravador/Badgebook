@@ -6,8 +6,8 @@
           <br>
           <b-card class="bg-light text-center">
             <img src="@/assets/image.png" class>
-            <h5>{{name}}</h5>
-            <p>{{venue}}</p>
+            <h5>{{ badgename}}</h5>
+            <p>{{ venue}}</p>
           </b-card>
         </b-col>
         <b-col cols="8">
@@ -39,43 +39,83 @@
           <form @submit.stop.prevent="handleSubmit">
             <b-label for="usernamei">Search Username</b-label>
             <b-input id="usernamei" v-model="s_username" @change="userExit = true"/>
-          </form>
-          <br>
-          <b-label for="role">Pick Role</b-label>
-          <b-card>
-            <b-form-select v-model="selectedRole" :options="options" @change="notnull"></b-form-select>
-            <i>
-              <p class="text-center red">{{ warning }}</p>
-            </i>
-          </b-card>
-          <br>
-          <b-card v-if="userExit">
+            <br>
+            <b-label for="role">Pick Role</b-label>
+            <b-card>
+              <b-form-select v-model="selectedRole" :options="options" @change="removeWarning"></b-form-select>
+              <i>
+                <p class="text-center red">{{ warning }}</p>
+              </i>
+            </b-card>
+            <br>
+            <b-card v-if="userExit">
+              <b-row>
+                <b-col class="text-center">
+                  <img src="@/assets/pro.png" rounded="circle" class="size50">
+                </b-col>
+                <b-col cols="9" class="border-left">
+                  <p>Role : {{ selectedRole}}</p>
+                  <p>Username: {{ s_username }}</p>
+                </b-col>
+              </b-row>
+            </b-card>
+            <br>
             <b-row>
-              <b-col class="text-center">
-                <img src="@/assets/pro.png" rounded="circle" class="size50">
+              <b-col>
+                <b-button v-on:click="handleCancel" variant="danger" class="btn btn-block">Cancel</b-button>
               </b-col>
-              <b-col cols="9" class="border-left">
-                <p>Role : {{ selectedRole}}</p>
-                <p>Username: {{ s_username }}</p>
+              <b-col cols="8">
+                <b-button type="submit" variant="primary" class="btn btn-block">Add Recipient</b-button>
               </b-col>
             </b-row>
-          </b-card>
-          <br>
-          <b-row>
-            <b-col>
-              <b-button v-on:click="handleCancel" variant="danger" class="btn btn-block">Cancel</b-button>
-            </b-col>
-            <b-col cols="8">
-              <b-button
-                v-on:click="handleSubmit"
-                variant="primary"
-                class="btn btn-block"
-              >Add Recipient</b-button>
-            </b-col>
-          </b-row>
+          </form>
         </b-modal>
-        <b-modal size="lg" id="certify-modal" title="Certify The Recipients" hide-footer>
-          <b-input/>
+        <b-modal size="dm" id="certify-modal" title="Certify The Recipients" hide-footer>
+          <div class="text-center ifont">
+            <form @submit.stop.prevent="handleCertificationSubmit">
+              <span>This certificate of</span>
+              <br> 
+              <input
+                class="inputline"
+                size="15"
+                placeholder="Certificate Category"
+                v-model="certificateCategory"
+              >
+              <br>
+              <br>
+              <span>is awarded to</span>
+              <br>
+              <p>
+                (Names are auto generated)
+                <br>for
+              </p>
+              <textarea
+                name="description"
+                id="description"
+                cols="30"
+                rows="3"
+                placeholder="Description of the event"
+                v-model="descriptions"
+              ></textarea>
+              <p>at</p>
+              <input class="inputline" size="30" placeholder="Venue of the event" v-model="venue">
+              <br>
+              <p>Given this {{ date }}</p>
+              <hr>
+              <b-row>
+                <b-col>
+                  <b-button
+                    variant="danger"
+                    class="btn btn-block"
+                    v-on:click="resetCertification"
+                  >Cancel</b-button>
+                </b-col>
+                <b-col cols="8">
+                  <b-button variant="primary" class="btn btn-block" type="sumbit">Certify Now</b-button>
+                </b-col>
+              </b-row>
+            </form>
+          </div>
         </b-modal>
       </b-row>
     </b-card>
@@ -89,19 +129,24 @@ export default {
   data() {
     return {
       people: [
-        { username: "mrclay", Role: "Speaker" },
-        { username: "jmhy", Role: "Audience" }
+        { username: "mrclay", role: "Speaker" },
+        { username: "jmhy", role: "Audience" }
       ],
       options: [
         { value: "Speaker", text: "Speaker" },
         { value: "Audience", text: "Audience" }
       ],
+      badgename: "Programming Workshop",
+      venue: "Center 2",
       selectedRole: "No role selected",
       s_username: "",
       S_src: "",
       data: "",
       userExit: false,
-      warning: ""
+      warning: "",
+      date: new Date().toDateString(),
+      certificateCategory: "",
+      descriptions: ""
     };
   },
   methods: {
@@ -141,10 +186,33 @@ export default {
       this.resetModal();
       this.$bvModal.hide("addRecipient-modal");
     },
-    notnull() {
+    removeWarning() {
       if (this.selectedRole !== "No role selected") {
-        this.warning = ""
+        this.warning = "";
       }
+    },
+    handleCertificationSubmit() {
+      var temp = [];
+      this.people.forEach(function(each) {
+        var newperson = {
+          "username": each.username,
+          "role": each.role,
+          "certificateCategory": this.certificateCategory,//stocks here
+          "venue": this.venue,
+          "badgename": this.badgename
+        };
+        temp.push(newperson)
+      });
+      temp.forEach(function(element) {
+        console.log(element);
+      });
+      //axios here
+      this.resetCertification() 
+    },
+    resetCertification() {
+      this.descriptions = "";
+      this.certificateCategory = "";
+      this.$bvModal.hide("certify-modal");
     }
   }
 };
@@ -157,6 +225,17 @@ export default {
 }
 .red {
   color: red;
+}
+
+.inputline {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  text-align: center;
+}
+.ifont {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 </style>
 
