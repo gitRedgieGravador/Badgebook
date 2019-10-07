@@ -9,16 +9,23 @@ const postRoute = require('./post.route');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
-  () => { console.log('Database is connected') },
-  err => { console.log('Can not connect to the database'+ err)}
+    () => { console.log('Database is connected') },
+    err => { console.log('Can not connect to the database' + err) }
 );
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/posts', postRoute);
+// app.use('/posts', postRoute);
 
-app.listen(PORT, function(){
-  console.log('Server is running on Port:',PORT);
+app.post('/suggest', function(req, res) {
+    //let data = req.params.body;
+    let list = ["redgie", "gravador", "jessa"]
+    console.log(list)
+    res.json(list)
+})
+
+app.listen(PORT, function() {
+    console.log('Server is running on Port:', PORT);
 });

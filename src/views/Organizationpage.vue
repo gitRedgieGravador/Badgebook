@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <div>
-          <h1>org info</h1>
+          <Orgprofile></Orgprofile>
         </div>
       </b-col>
       <b-col cols="9">
@@ -28,12 +28,14 @@
 <script>
 import Badges from "@/modules/organization/Badges.vue";
 import Certify from "@/modules/organization/Certify.vue";
+import Orgprofile from "@/modules/organization/orgprofile.vue";
 
 export default {
   name: "orgpage",
   components: {
     Badges,
-    Certify
+    Certify,
+    Orgprofile
   },
   data() {
     return {
