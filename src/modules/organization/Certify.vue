@@ -6,8 +6,8 @@
           <br>
           <b-card class="bg-light text-center">
             <img src="@/assets/image.png" class>
-            <h5>{{ badgename}}</h5>
-            <p>{{ venue}}</p>
+            <h5>{{ badgename }}</h5>
+            <p>{{ venue }}</p>
           </b-card>
         </b-col>
         <b-col cols="8">
@@ -54,7 +54,7 @@
                   <img src="@/assets/pro.png" rounded="circle" class="size50">
                 </b-col>
                 <b-col cols="9" class="border-left">
-                  <p>Role : {{ selectedRole}}</p>
+                  <p>Role : {{ selectedRole }}</p>
                   <p>Username: {{ s_username }}</p>
                 </b-col>
               </b-row>
@@ -74,7 +74,7 @@
           <div class="text-center ifont">
             <form @submit.stop.prevent="handleCertificationSubmit">
               <span>This certificate of</span>
-              <br> 
+              <br>
               <input
                 class="inputline"
                 size="15"
@@ -146,8 +146,14 @@ export default {
       warning: "",
       date: new Date().toDateString(),
       certificateCategory: "",
-      descriptions: ""
+      descriptions: "",
     };
+  },
+
+  created(){
+    axios.post(`http://localhost:3000/badge`).then(response =>{
+
+    })
   },
   methods: {
     suggest() {
@@ -174,7 +180,7 @@ export default {
       if (this.validate() == true) {
         this.people.push({
           username: this.s_username,
-          Role: this.selectedRole
+          role: this.selectedRole
         });
         this.$bvModal.hide("addRecipient-modal");
         this.resetModal();
@@ -193,21 +199,20 @@ export default {
     },
     handleCertificationSubmit() {
       var temp = [];
-      this.people.forEach(function(each) {
+      this.people.forEach(each => {
+        alert(this.badgename);
         var newperson = {
-          "username": each.username,
-          "role": each.role,
-          "certificateCategory": this.certificateCategory,//stocks here
-          "venue": this.venue,
-          "badgename": this.badgename
+          username: each.username,
+          role: each.role,
+          badgename: this.badgename,
+          certificateCategory: this.certificateCategory,
+          venue: this.venue,
+          date: this.date
         };
-        temp.push(newperson)
+        temp.push(newperson);
       });
-      temp.forEach(function(element) {
-        console.log(element);
-      });
-      //axios here
-      this.resetCertification() 
+      // axios pass data temp[]
+      this.resetCertification();
     },
     resetCertification() {
       this.descriptions = "";

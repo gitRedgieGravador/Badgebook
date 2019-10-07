@@ -7,20 +7,24 @@
         </div>
       </b-col>
       <b-col cols="9">
-          <div>
-            <h3>
-              <b-tabs>
-                <b-tab v-on:click="togoBadges" title="Badge Offers" active align="left"></b-tab>
-                <b-tab v-on:click="gotoCertify" title="Certify" align="right"></b-tab>
-              </b-tabs>
-            </h3>
-          </div>
-          <div v-if="isBadges">
-              <Badges></Badges>
-          </div>
-          <div v-if="isToCerfify">
-              <Certify></Certify>
-          </div>
+        <div>
+          <h3>
+            <b-tabs>
+              <b-tab v-on:click="togoBadges" title="Badge Offers" active align="left"></b-tab>
+              <b-tab v-on:click="gotoCertify" title="Certify" align="right"></b-tab>
+              <b-tab v-on:click="gotooffer" title="Offer A Badge" align="right"></b-tab>
+            </b-tabs>
+          </h3>
+        </div>
+        <div v-if="isBadges">
+          <Badges></Badges>
+        </div>
+        <div v-if="isToCerfify">
+          <Certify></Certify>
+        </div>
+        <div v-if="isOffer">
+          <Offer></Offer>
+        </div>
       </b-col>
     </b-row>
   </div>
@@ -29,27 +33,37 @@
 import Badges from "@/modules/organization/Badges.vue";
 import Certify from "@/modules/organization/Certify.vue";
 import Orgprofile from "@/modules/organization/orgprofile.vue";
+import Offer from "@/modules/organization/Offer.vue";
 
 export default {
   name: "orgpage",
   components: {
     Badges,
     Certify,
-    Orgprofile
+    Orgprofile,
+    Offer
   },
   data() {
     return {
       isBadges: true,
-      isToCerfify: false
+      isToCerfify: false,
+      isOffer: false
     };
   },
   methods: {
     togoBadges() {
       this.isBadges = true;
       this.isToCerfify = false;
+      this.isOffer = false;
     },
     gotoCertify() {
       this.isToCerfify = true;
+      this.isBadges = false;
+      this.isOffer = false;
+    },
+    gotooffer() {
+      this.isOffer = true;
+      this.isToCerfify = false;
       this.isBadges = false;
     }
   }
@@ -58,8 +72,8 @@ export default {
 
 <style scoped>
 .pd-side {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 </style>
 

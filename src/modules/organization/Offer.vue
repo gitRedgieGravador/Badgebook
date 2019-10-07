@@ -1,12 +1,22 @@
 <template>
-  <div id="badges">
+  <div id="offer">
     <div>
       <b-card>
-        fhdkgndkgnbj
+        offer a badge
       </b-card>
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: 'offer',
+  data(){
+    return {
+
+    }
+  }
+}
+</script>
 
 <style scoped>
 .inputline {
