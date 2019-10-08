@@ -200,7 +200,6 @@ export default {
     handleCertificationSubmit() {
       var temp = [];
       this.people.forEach(each => {
-        alert(this.badgename);
         var newperson = {
           username: each.username,
           role: each.role,
