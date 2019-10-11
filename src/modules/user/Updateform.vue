@@ -5,7 +5,7 @@
         <h1 class="sign">Update Profile</h1>
       </center>
       <b-row>
-        <b-col>
+        <b-col class="border-rig">
           <label>
             <div class="fixedwidth">
               <p class="label-txt">Firstname</p>

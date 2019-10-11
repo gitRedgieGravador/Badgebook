@@ -22,7 +22,7 @@
             </div>
           </div>
           <div v-if="isUpdateProfile">
-            <Updateinfo></Updateinfo>
+            <Updateform></Updateform>
           </div>
           <div v-if="isNewsfeed">
             <Newsfeed></Newsfeed>
@@ -35,22 +35,21 @@
 <script>
 import Mybadge from "@/modules/user/Mybadge.vue";
 import Newsfeed from "@/modules/user/Newsfeed.vue";
-//import Updateinfo from "@/modules/user/Updateinfo.vue";
 import Profile from "@/modules/user/Profile.vue";
-import Updateinfo from '@/components/Updateform.vue';
+import Updateform from '@/components/Updateform.vue';
 export default {
   name: "userpage",
   components: {
     Mybadge,
     Newsfeed,
-    Updateinfo,
+    Updateform,
     Profile
   },
   data() {
     return {
       isBadgeList: false,
       isNewsfeed: true,
-      isUpdateProfile: false
+      isUpdateProfile: false,
     };
   },
   created() {
