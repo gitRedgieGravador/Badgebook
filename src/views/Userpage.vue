@@ -35,8 +35,9 @@
 <script>
 import Mybadge from "@/modules/user/Mybadge.vue";
 import Newsfeed from "@/modules/user/Newsfeed.vue";
-import Updateinfo from "@/modules/user/Updateinfo.vue";
+//import Updateinfo from "@/modules/user/Updateinfo.vue";
 import Profile from "@/modules/user/Profile.vue";
+import Updateinfo from '@/components/Updateform.vue';
 export default {
   name: "userpage",
   components: {

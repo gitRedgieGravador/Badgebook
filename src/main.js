@@ -21,6 +21,7 @@ import EditComponent from './components/EditComponent.vue';
 import Userpage from './views/Userpage.vue';
 import Homepage from './views/Homepage.vue';
 import Orgpage from './views/Organizationpage.vue';
+import Updateform from './components/Updateform.vue';
 
 const routes = [{
         name: 'home',
