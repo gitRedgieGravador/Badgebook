@@ -16,7 +16,7 @@
                 v-model="newinfo.firstname"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -34,7 +34,7 @@
                 v-model="newinfo.lastname"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -54,7 +54,7 @@
                 v-model="newinfo.username"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -72,7 +72,7 @@
                 v-model="newinfo.age"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -92,7 +92,7 @@
                 v-model="newinfo.occupation"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -110,7 +110,7 @@
                 v-model="newinfo.years"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -130,7 +130,7 @@
                 v-model="newinfo.address"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -148,7 +148,7 @@
                 v-model="newinfo.email"
                 autocomplete="off"
                 required
-              />
+              >
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -156,16 +156,21 @@
           </label>
         </b-col>
       </b-row>
-      <b-form-group label="Gender" id="gender-form">
-        <b-form-radio-group id="radio-gender" v-model="newinfo.gender" name="radio-gender">
-          <b-form-radio value="Male">Male</b-form-radio>
-          <b-form-radio value="Female">Female</b-form-radio>
-        </b-form-radio-group>
-      </b-form-group>
-      <br />
-
+      <b-row>
+        <b-col>
+          <b-form-group label="Gender" id="gender-form">
+            <b-form-radio-group id="radio-gender" v-model="newinfo.gender" name="radio-gender">
+              <b-form-radio value="Male">Male</b-form-radio>
+              <b-form-radio value="Female">Female</b-form-radio>
+            </b-form-radio-group>
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <br>
+          <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
+        </b-col>
+      </b-row>
     </form>
-    <button class="btn btn-primary btn-block btn-lg">Submit</button>
   </div>
 </template>
 
@@ -372,5 +377,9 @@ label {
 
 #gender-form {
   margin-right: 100%;
+}
+
+button{
+  width: 250px;
 }
 </style>

@@ -7,8 +7,15 @@
             <p class="sign2">Update Organization Information</p>
             
             <label>
-              <p class="label-txt">ADDRESS</p>
-              <input type="text" class="input" required v-model="address">
+              <p class="label-txt">Name</p>
+              <input type="text" class="input" required v-model="name" placeholder="Organization name">
+              <div class="line-box">
+                <div class="line"></div>
+              </div>
+            </label>
+            <label>
+              <p class="label-txt">Username</p>
+              <input type="text" class="input" required v-model="username" placeholder="username">
               <div class="line-box">
                 <div class="line"></div>
               </div>
@@ -16,17 +23,8 @@
             <table class="lastrow">
               <td>
                 <label class="ln">
-                  <p class="label-txt">OCCUPATION</p>
-                  <input type="text" class="input" v-model="occupation">
-                  <div class="line-box">
-                    <div class="line"></div>
-                  </div>
-                </label>
-              </td>
-              <td id="years">
-                <label class="ln">
-                  <p class="label-txt">YEARS</p>
-                  <input type="number" class="input" v-model="years" min="1">
+                  <p class="label-txt">Address</p>
+                  <input type="text" class="input" v-model="address" placeholder="address">
                   <div class="line-box">
                     <div class="line"></div>
                   </div>
@@ -35,13 +33,20 @@
             </table>
 
             <label>
-              <p class="label-txt">EMAIL ADDRESS</p>
-              <input type="email" class="input" required v-model="email">
+              <p class="label-txt">Email Address</p>
+              <input type="email" class="input" required v-model="email" placeholder="email">
               <div class="line-box">
                 <div class="line"></div>
               </div>
             </label>
-            
+
+            <label>
+              <p class="label-txt">Description</p>
+              <input type="email" class="input" required v-model="description" placeholder="what do you do?">
+              <div class="line-box">
+                <div class="line"></div>
+              </div>
+            </label>
             <button type="submit">submit</button>
           </div>
         </form>
@@ -59,98 +64,20 @@ export default {
   data() {
     return {
       username: "",
-      password: "",
-      confirmpassword: "",
-      firstname: "",
-      lastname: "",
       email: "",
-      age: "",
       address: "",
-      occupation: "",
-      gender: "",
-      birthdate: {
-        month: "",
-        day: "",
-        year: ""
-      },
+      name: "",
+      description: "",
       isValid: false,
-      years: "",
       err: false
     };
   },
 
   methods: {
-    register() {
-      let userInfo = {
-        username: this.username,
-        password: this.password,
-        firstname: this.firstname,
-        lastname: this.lastname,
-        birthdate: this.birthdate,
-        email: this.email,
-        address: this.address,
-        occupation: this.occupation,
-        gender: this.gender,
-        age: this.age
-      };
-      if (
-        this.isValid &&
-        this.password != "" &&
-        this.password == this.confirmpassword
-      ) {
-        axios.post("http://localhost:8081/fullsignup", userInfo);
-        alert("successfully registered");
-      } else {
-        alert("invalid credentials!");
-      }
-    },
-    checkUsername() {
-      axios
-        .post("http://localhost:8081/checkusername", {
-          username: this.username
-        })
-        .then(
-          response => {
-            if (response.data != "username already used!") {
-              this.err = false;
-              this.isValid = true;
-            } else {
-              this.err = true;
-              this.isValid = false;
-            }
-          },
-          err => {
-            console.log("error occured");
-          }
-        );
-    },
-    month(m) {
-      this.birthdate.month = m;
-    }
+    
   },
   created() {
-    if (
-      this.username != "" &&
-      this.password != "" &&
-      this.confirmpassword != ""
-    ) {
-      $(".label-txt1").addClass("label-active");
-    }
-    axios.get("http://localhost:8081/signedup").then(
-      response => {
-        if (response.data.data != "error") {
-          console.log(response.data);
-          this.isValid = true;
-          this.username = response.data.data.username;
-          this.password = response.data.data.password;
-          this.confirmpassword = response.data.data.password;
-          $(".label-txt1").addClass("label-active");
-        }
-      },
-      err => {
-        console.log("error");
-      }
-    );
+    
   },
   mounted() {
     $(".input").focus(function() {
@@ -176,15 +103,6 @@ export default {
         .css({
           color: "#555657"
         });
-    });
-
-    $("#mnth").click(function() {
-      // $(this).parent().parent().parent().find("p").addClass("label-active").css({"color":"#0071ff"});
-      $(".month").show();
-    });
-
-    $("#mnth").onchage(function() {
-      $(".month").hide();
     });
   }
 };
@@ -338,7 +256,7 @@ table {
   border: 1px solid #bdbebf;
   overflow: visible;
   width: 970px;
-  height: 650px;
+  height: 700px;
 }
 
 .body {
@@ -473,5 +391,9 @@ button:hover {
   font-family: sans-serif;
   font-weight: normal;
   margin-bottom: 60px;
+}
+
+::placeholder{
+  text-align: center;
 }
 </style>
