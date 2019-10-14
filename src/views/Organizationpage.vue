@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <div>
-          <Orgprofile></Orgprofile>
+          <Orgprofile v-on:InsideMethod="gotoUpdate"></Orgprofile>
         </div>
       </b-col>
       <b-col cols="9">
@@ -25,6 +25,9 @@
         <div v-if="isOffer">
           <Offer></Offer>
         </div>
+        <div v-if="isUpdate">
+          <UpdateOrg></UpdateOrg>
+        </div>
       </b-col>
     </b-row>
   </div>
@@ -34,6 +37,7 @@ import Badges from "@/modules/organization/Badges.vue";
 import Certify from "@/modules/organization/Certify.vue";
 import Orgprofile from "@/modules/organization/orgprofile.vue";
 import Offer from "@/modules/organization/Offer.vue";
+import UpdateOrg from '@/modules/organization/Update.vue';
 
 export default {
   name: "orgpage",
@@ -41,13 +45,15 @@ export default {
     Badges,
     Certify,
     Orgprofile,
-    Offer
+    Offer,
+    UpdateOrg
   },
   data() {
     return {
       isBadges: true,
       isToCerfify: false,
-      isOffer: false
+      isOffer: false,
+      isUpdate: false
     };
   },
   methods: {
@@ -55,14 +61,23 @@ export default {
       this.isBadges = true;
       this.isToCerfify = false;
       this.isOffer = false;
+      this.isUpdate = false
     },
     gotoCertify() {
       this.isToCerfify = true;
       this.isBadges = false;
       this.isOffer = false;
+      this.isUpdate = false
     },
     gotooffer() {
       this.isOffer = true;
+      this.isToCerfify = false;
+      this.isBadges = false;
+      this.isUpdate = false
+    },
+    gotoUpdate(){
+      this.isUpdate = true,
+      this.isOffer = false;
       this.isToCerfify = false;
       this.isBadges = false;
     }

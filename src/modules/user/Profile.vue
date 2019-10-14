@@ -1,9 +1,7 @@
 <template>
   <div id="Profile">
-    <div class="text-center">
-      <b-card>
-        <img src="@/assets/profile.png" alt class="border" id="profile">
-      </b-card>
+    <div class="text-center"><br><br>
+        <img :src="image" class="border rounded-circle border-dark" id="profile">
       <div class="card-header">
         <h3>{{ userinfo.firstname }} {{userinfo.lastname}}</h3>
         <button v-on:click="InsideMethod" class="btn btn-primary btn-block">Update Profile</button>
@@ -31,6 +29,7 @@ export default {
   data() {
     return {
       userinfo: {},
+      image: require('@/assets/profile.png')
     };
   },
   created() {
@@ -55,6 +54,7 @@ export default {
   methods: {
     InsideMethod() {
       this.$emit('InsideMethod');
+
     }
   }
 };
