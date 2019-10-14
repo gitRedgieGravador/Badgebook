@@ -15,33 +15,14 @@ Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
-import CreateComponent from './components/CreateComponent.vue';
-import IndexComponent from './components/IndexComponent.vue';
-import EditComponent from './components/EditComponent.vue';
 import Userpage from './views/Userpage.vue';
 import Homepage from './views/Homepage.vue';
 import Orgpage from './views/Organizationpage.vue';
-import Updateform from './components/Updateform.vue';
 
 const routes = [{
         name: 'home',
         path: '/',
         component: Homepage
-    },
-    {
-        name: 'create',
-        path: '/create',
-        component: CreateComponent
-    },
-    {
-        name: 'posts',
-        path: '/posts',
-        component: IndexComponent
-    },
-    {
-        name: 'newsfeed',
-        path: '/userpage/newsfeed',
-        component: EditComponent
     },
     {
         name: 'userpage',

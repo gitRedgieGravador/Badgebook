@@ -36,7 +36,7 @@
 import Mybadge from "@/modules/user/Mybadge.vue";
 import Newsfeed from "@/modules/user/Newsfeed.vue";
 import Profile from "@/modules/user/Profile.vue";
-import Updateform from '@/components/Updateform.vue';
+import Updateform from '@/modules/user/Updateform.vue';
 export default {
   name: "userpage",
   components: {
