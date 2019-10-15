@@ -19,14 +19,14 @@
               <b-col>
                 <b-button
                   variant="primary"
-                  class="btn btn-block"
+                  class="btn btn-block shadow rounded"
                   v-b-modal.certify-modal
                 >Certify Recipients</b-button>
               </b-col>
               <b-col>
                 <b-button
                   variant="primary"
-                  class="btn btn-block"
+                  class="btn btn-block shadow rounded"
                   v-b-modal.addRecipient-modal
                 >Add Recipient</b-button>
               </b-col>
