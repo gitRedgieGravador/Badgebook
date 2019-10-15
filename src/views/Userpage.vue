@@ -3,7 +3,7 @@
     <div class="bv-example-row pd-side">
       <b-row>
         <b-col class="border-right">
-          <Profile v-on:InsideMethod="gotoUpdateProfile"></Profile>
+          <Profile v-on:InsideMethod="gotoUpdateProfile" :username="this.username"></Profile>
         </b-col>
         <b-col cols="9" class>
           <div class="bg-light text-center">
@@ -39,6 +39,9 @@ import Profile from "@/modules/user/Profile.vue";
 import Updateform from '@/modules/user/Updateform.vue';
 export default {
   name: "userpage",
+  props:{
+    username: String,
+  },
   components: {
     Mybadge,
     Newsfeed,

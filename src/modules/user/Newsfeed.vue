@@ -5,9 +5,10 @@
         <div v-for="(badge, index) in this.upcoming_list1" :key="index">
           <b-col class="text-center">
             <b-card>
-              <img src="@/assets/image.png" class>
-              <h5>{{badge.name}}</h5>
+              <img src="@/assets/image.png">
+              <h5>{{badge.badgename}}</h5>
               <p>{{badge.venue}}</p>
+              <p>{{badge.date}}</p>
             </b-card>
           </b-col>
         </div>
@@ -17,9 +18,10 @@
         <div v-for="(badge, index) in this.upcoming_list2" :key="index">
           <b-col class="text-center">
             <b-card>
-              <img src="@/assets/image.png" class>
-              <h5>{{badge.name}}</h5>
+              <img src="@/assets/image.png">
+              <h5>{{badge.badgename}}</h5>
               <p>{{badge.venue}}</p>
+              <p>{{badge.date}}</p>
             </b-card>
           </b-col>
         </div>
@@ -41,18 +43,18 @@ export default {
     };
   },
   created() {
-    this.upcoming_list1 = [
-      { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
-      { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
-      { name: "Programming Workshop", venue: "J Center Mall Mandaue" }
+    this.upcoming_list1 = [//to be deleted
+      { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" },
+      { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" },
+      { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" }
     ];
     this.upcoming_list2 = [
-      { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
-      { name: "Programming Workshop", venue: "J Center Mall Mandaue" },
-      { name: "Programming Workshop", venue: "J Center Mall Mandaue" }
+      { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" },
+      { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" },
+      { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" }
     ];
 
-    let uri_upcomingbadge = `http://localhost:4000/user/regular/`;
+    let uri_upcomingbadge = `http://localhost:4000/newsfeed-regular/${this.username}`;
     this.axios.post(uri_upcomingbadge).then(response => {
       for (let i = 0; i <= 6; ++i) {
         if (i <= 3) {

@@ -5,9 +5,7 @@
       <br />
     </div>
     <b-row>
-      <div v-if="hasexcess">
-          <Bythree :data="excessData"></Bythree>
-      </div>
+      <Bythree :data="excessData"></Bythree>
     </b-row>
   </div>
 </template>
@@ -20,40 +18,31 @@ export default {
   },
   data() {
     return {
-      allData: [
-        { name: "Programming Workshop1", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop2", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop3", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop4", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop5", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop6", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop7", venue: "J Center Mall Mandaue" },
-        { name: "Programming Workshop8", venue: "J Center Mall Mandaue" }
-      ],
       by3Data: [],
       temp: [],
-      excessData: [],
-      hasexcess: true
+      excessData: []
     };
   },
 
   created() {
-    var excess = false;
-    for (let i = 0; i < this.allData.length; ++i) {
+    let uri_orgbadges = `http://localhost:4000/badges-org/${this.username}`;
+    this.axios.post(uri_orgbadges).then(response => {
+      var allData = response.data;
+      for (let i = 0; i < allData.length; ++i) {
         if ((i + 1) % 3 == 0) {
-          this.temp.push(this.allData[i]);
+          this.temp.push(allData[i]);
           this.by3Data.push(this.temp);
           this.temp = [];
         } else {
-          this.temp.push(this.allData[i]);
+          this.temp.push(allData[i]);
         }
-        if (i - 1 == (this.allData.length - (this.allData.length%3))){
-          this.excessData.push(this.allData[i]);
-        }else if (i == (this.allData.length - (this.allData.length%3))){
-          this.excessData.push(this.allData[i]);
+        if (i - 1 == allData.length - (allData.length % 3)) {
+          this.excessData.push(allData[i]);
+        } else if (i == allData.length - (allData.length % 3)) {
+          this.excessData.push(allData[i]);
         }
-      
-    }
+      }
+    });
   }
 };
 </script>

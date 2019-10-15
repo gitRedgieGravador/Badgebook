@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="signupform" @submit.prevent="login">
+    <form class="signupform">
       <center>
         <h1 class="sign">Update Profile</h1>
       </center>
@@ -167,7 +167,7 @@
         </b-col>
         <b-col>
           <br>
-          <button class="btn btn-primary btn-block btn-lg" type="submit">Submit</button>
+          <button class="btn btn-primary btn-block btn-lg" v-on:click="sendUpdate">Submit</button>
         </b-col>
       </b-row>
     </form>
@@ -180,10 +180,13 @@ import axios from "axios";
 
 export default {
   name: "SignUp",
+  props:{
+    username: String
+  },
   data() {
     return {
-      newinfo: [
-        {
+      newinfo: 
+        {//to be deleted
           firstname: "Redgie",
           lastname: "Gravador",
           age: 22,
@@ -194,11 +197,24 @@ export default {
           email: "redgie@gmail.com",
           username: "mrclay"
         }
-      ]
     };
   },
-  methods: {},
+  methods: {
+    sendUpdate(event){
+      event.preventDefault()
+      alert("sending update")
+      let uri_update = `http://localhost:4000/update-regular/${this.username}`
+      axios.post(uri_update, this.newinfo).then(response => {
+        /* eslint-disable */
+        console.log(response.data);
+      })
+    }
+  },
   mounted() {
+    let uri_profile = `http://localhost:4000/profile-regular/${this.username}`;
+    this.axios.post(uri_profile).then(response => {
+      this.newinfo = response.data;
+    });
     $(".input").focus(function() {
       $(this)
         .parent()
@@ -214,18 +230,6 @@ export default {
           .removeClass("label-active");
       }
     });
-
-    this.newinfo = {
-      firstname: "Redgie",
-      lastname: "Gravador",
-      age: 22,
-      gender: "Male",
-      occupation: "Web Developer",
-      years: 5,
-      address: "Tamlamban Cebu",
-      email: "redgie@gmail.com",
-      username: "mrclay"
-    };
   }
 };
 </script>

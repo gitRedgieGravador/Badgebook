@@ -5,7 +5,7 @@
           <b-col class="text-center">
             <b-card>
               <img src="@/assets/image.png" class />
-              <h5>{{badge.name}}</h5>
+              <h5>{{badge.bandgename}}</h5>
               <p>{{badge.venue}}</p>
             </b-card>
           </b-col>

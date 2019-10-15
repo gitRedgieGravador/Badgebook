@@ -26,6 +26,9 @@
 
 export default {
   name: "Profile",
+  props:{
+    username :String
+  },
   data() {
     return {
       userinfo: {},
@@ -33,19 +36,19 @@ export default {
     };
   },
   created() {
-    this.userinfo = {
+    this.userinfo = {//this is to be deleted
       firstname: "Redgie",
       lastname: "Gravador",
-      username: "mrclay",
       age: 22,
       gender: "Male",
       occupation: "Web developer",
       years: 5,
       address: "Talamban",
-      email: "redgie@gmail.com"
+      email: "redgie@gmail.com",
+      username: "mrclay"
     };
 
-    let uri_profile = `http://localhost:4000/user/regular/profile/`;
+    let uri_profile = `http://localhost:4000/profile-regular/${this.username}`;
     this.axios.post(uri_profile).then(response => {
       this.userinfo = response.data;
     });

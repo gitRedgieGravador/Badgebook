@@ -3,7 +3,7 @@
     <div class="text-center">
       <br>
       <br>
-      <img :src="image" alt class="border rounded-circle border-dark" id="profile">
+      <img :src="orginfo.image" alt class="border rounded-circle border-dark" id="profile">
       <div class="card-header">
         <h3>{{orginfo.orgname }}</h3>
         <button v-on:click="InsideMethod" class="btn btn-primary btn-block">Update Profile</button>
@@ -24,24 +24,27 @@
 <script>
 export default {
   name: "Profile",
+  props:{
+    username: String
+  },
   data() {
     return {
-      userinfo: {},
-      image: require("@/assets/pn.png")
+      orginfo: {}
     };
   },
   created() {
-    this.orginfo = {
-      orgname: "Passerelles numeriques",
-      address: "Talamban Cebu",
-      username: "gateway",
-      description: "We provide a gateway for life",
-      email: "passellesnumeriques.org"
-    };
+    // this.orginfo = {
+    //   orgname: "Passerelles numeriques",
+    //   address: "Talamban Cebu",
+    //   username: "gateway",
+    //   description: "We provide a gateway for life",
+    //   email: "passellesnumeriques.org",
+    //   image: require("@/assets/pn.png")
+    // };
 
-    let uri_profile = `http://localhost:4000/user/regular/profile/`;
-    this.axios.post(uri_profile).then(response => {
-      this.userinfo = response.data;
+    let uri_orgprofile = `http://localhost:4000/profile-org/${this.username}`;
+    this.axios.post(uri_orgprofile).then(response => {
+      this.orginfo = response.data;
     });
   },
 

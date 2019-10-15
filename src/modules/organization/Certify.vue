@@ -38,7 +38,7 @@
         <b-modal id="addRecipient-modal" title="Recepient Information" hide-footer>
           <form @submit.stop.prevent="handleSubmit">
             <b-label for="usernamei">Search Username</b-label>
-            <b-input id="usernamei" v-model="s_username" @change="userExit = true"/>
+            <b-input id="usernamei" v-model="s_username" @change="userExit = true" @keyup="suggest"/>
             <br>
             <b-label for="role">Pick Role</b-label>
             <b-card>
@@ -126,6 +126,9 @@
 import axios from "axios";
 export default {
   name: "certify",
+  props:{
+    username: String
+  },
   data() {
     return {
       people: [
@@ -138,26 +141,34 @@ export default {
       ],
       badgename: "Programming Workshop",
       venue: "Center 2",
+      date: new Date().toDateString(),
+
       selectedRole: "No role selected",
       s_username: "",
-      S_src: "",
-      data: "",
-      userExit: false,
+      s_src: "",
       warning: "",
-      date: new Date().toDateString(),
       certificateCategory: "",
       descriptions: "",
+      userExit: false
     };
   },
 
   created(){
-    axios.post(`http://localhost:3000/badge`).then(response =>{
-
+    let uri_tocertify = `http://localhost:4000/tocertify/${this.username}/${this.data}`
+    axios.post(uri_tocertify).then(response =>{
+      var get = response.data;
+      this.people = get.people;
+      this.options = get.options;
+      this.badgename = get.badgename;
+      this.venue = get.venue;
+      this.date = get.date;
     })
   },
   methods: {
+
+    //to continued
     suggest() {
-      axios.post(`http://localhost:3000/suggest`).then(response => {
+      axios.post(`http://localhost:4000/suggest`).then(response => {
         for (let i = 0; i < response.length; ++i) {
           this.suggestions.push(response[i]);
         }
@@ -210,7 +221,11 @@ export default {
         };
         temp.push(newperson);
       });
-      // axios pass data temp[]
+      let uri_certify = `http://localhost:4000/certifynow/${this.username}`
+      axios.post(uri_certify, temp).then(response => {
+        /* eslint-disable */
+        console.log(response.data)
+      })
       this.resetCertification();
     },
     resetCertification() {

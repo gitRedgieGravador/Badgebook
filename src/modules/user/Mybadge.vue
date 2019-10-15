@@ -35,18 +35,21 @@
 <script>
 export default {
   name: "Newsfeed",
+  props: {
+    username: String
+  },
   data() {
     return {
       badgelist: []
     };
   },
   mounted() {
-    this.badgelist = [
+    this.badgelist = [//to be deleted
       {
         badgename: "Medical Mission",
         certificateCategory: "Appreciation",
-        descriptions:
-          "the active voluntarism offered during the medical mission for free vacination",
+        description:
+          "The active voluntarism offered during the medical mission for free vacination",
         venue: "Talamban health center",
         date: "Mon Oct 14 2019",
         time: "9 AM",
@@ -54,7 +57,7 @@ export default {
         recepient: "Redgie Gravador"
       }
     ];
-    let uri_badgelist = `http://localhost:4000/user/regular/`;
+    let uri_badgelist = `http://localhost:4000/regular-badgelist/${this.username}`;
     this.axios.post(uri_badgelist).then(response => {
       this.badgelist = response.data;
     });
