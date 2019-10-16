@@ -57,8 +57,8 @@ export default {
         recepient: "Redgie Gravador"
       }
     ];
-    let uri_badgelist = `http://localhost:4000/regular-badgelist/${this.username}`;
-    this.axios.post(uri_badgelist).then(response => {
+    let uri_badgelist = `http://localhost:8081/regular-badgelist/${this.username}`;
+    this.axios.get(uri_badgelist).then(response => {
       this.badgelist = response.data;
     });
   }

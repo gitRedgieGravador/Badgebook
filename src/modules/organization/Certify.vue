@@ -131,18 +131,11 @@ export default {
   },
   data() {
     return {
-      people: [
-        { username: "mrclay", role: "Speaker" },
-        { username: "jmhy", role: "Audience" }
-      ],
-      options: [
-        { value: "Speaker", text: "Speaker" },
-        { value: "Audience", text: "Audience" }
-      ],
-      badgename: "Programming Workshop",
-      venue: "Center 2",
+      people: [],
+      options: [],
+      badgename: "",
+      venue: "",
       date: new Date().toDateString(),
-
       selectedRole: "No role selected",
       s_username: "",
       s_src: "",
@@ -154,8 +147,8 @@ export default {
   },
 
   created(){
-    let uri_tocertify = `http://localhost:4000/tocertify/${this.username}/${this.data}`
-    axios.post(uri_tocertify).then(response =>{
+    let uri_tocertify = `http://localhost:4000/tocertify/${this.username}/${this.date}`
+    axios.get(uri_tocertify).then(response =>{
       var get = response.data;
       this.people = get.people;
       this.options = get.options;

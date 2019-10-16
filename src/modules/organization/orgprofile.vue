@@ -33,17 +33,8 @@ export default {
     };
   },
   created() {
-    // this.orginfo = {
-    //   orgname: "Passerelles numeriques",
-    //   address: "Talamban Cebu",
-    //   username: "gateway",
-    //   description: "We provide a gateway for life",
-    //   email: "passellesnumeriques.org",
-    //   image: require("@/assets/pn.png")
-    // };
-
     let uri_orgprofile = `http://localhost:4000/profile-org/${this.username}`;
-    this.axios.post(uri_orgprofile).then(response => {
+    this.axios.get(uri_orgprofile).then(response => {
       this.orginfo = response.data;
     });
   },

@@ -54,8 +54,8 @@ export default {
       { badgename: "Programming Workshop", venue: "J Center Mall Mandaue", date: "10/15/2019" }
     ];
 
-    let uri_upcomingbadge = `http://localhost:4000/newsfeed-regular/${this.username}`;
-    this.axios.post(uri_upcomingbadge).then(response => {
+    let uri_upcomingbadge = `http://localhost:8081/newsfeed-regular/${this.username}`;
+    this.axios.get(uri_upcomingbadge).then(response => {
       for (let i = 0; i <= 6; ++i) {
         if (i <= 3) {
           this.upcoming_list1 = response.data[i];

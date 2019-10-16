@@ -61,9 +61,11 @@ import $ from "jquery";
 
 export default {
   name: "FullSignUp",
+  props: {
+    username: String
+  },
   data() {
     return {
-      username: "",
       email: "",
       address: "",
       name: "",
@@ -76,10 +78,14 @@ export default {
   methods: {
     
   },
-  created() {
-    
-  },
   mounted() {
+    let url = `http://localhost:8081/update-org/${this.username}`
+    axios.get(url).then(response => {
+      this.email = response.data.email
+      this.address = response.data.address
+      this.name = response.data.name // org name
+      this.description = response.data.description
+    })
     $(".input").focus(function() {
       $(this)
         .parent()

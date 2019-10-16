@@ -48,8 +48,8 @@ export default {
       username: "mrclay"
     };
 
-    let uri_profile = `http://localhost:4000/profile-regular/${this.username}`;
-    this.axios.post(uri_profile).then(response => {
+    let uri_profile = `http://localhost:8081/profile-regular/${this.username}`;
+    this.axios.get(uri_profile).then(response => {
       this.userinfo = response.data;
     });
   },
