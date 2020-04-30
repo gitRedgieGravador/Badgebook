@@ -11,7 +11,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "bootstrap-vue": "^2.0.0-rc.19",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1"
